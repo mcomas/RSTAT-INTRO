@@ -1,0 +1,37 @@
+# Session 1. Introduction to R
+
+- R structures.
+- Repositories and packages.
+- Importing and exporting data.
+
+# Session 2. Data management
+
+- Data cleaning.
+- Dealing with dates.
+- Characters and strings.
+- Factors.
+
+# Session 3. Descriptive statistics
+
+- Summarizing data with R.
+- Specific packages.
+- Basic statistics.
+- Describing variables graphically.
+
+# Session 4. Inferential statistics
+
+- Statistical hypothesis testing
+- Student's t-test and non-parametric tests for numerical data.
+- Pearson's Chi-squared and Fisher's Exact Test for count data.
+- Tests for association between paired samples.
+
+# Session 5. Linear models
+
+- Linear regression.
+- Logistic regression.
+
+# Session 6. Data visualization and reporting results
+
+- Creating graphics with R.
+- Reporting results with R.
+
