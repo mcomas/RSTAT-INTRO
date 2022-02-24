@@ -1,0 +1,191 @@
+---
+title: "Data management"
+output: 
+  ioslides_presentation: 
+    smaller: no
+    fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+options(tibble.print_min = 5, tibble.print_max = 5)
+```
+
+# `dplyr`: a grammar of data manipulation
+
+## Datasets {.smaller}
+
+```{r, warning=FALSE, echo=TRUE, results='hide', message=FALSE}
+library(nycflights13)
+data(package = 'nycflights13')
+```
+
+```
+Data sets in package ‘nycflights13’:
+
+airlines                      Airline names.
+airports                      Airport metadata
+flights                       Flights data
+planes                        Plane metadata.
+weather                       Hourly weather data
+```
+
+## Dataset: `flights` {.smaller}
+
+```{r, warning=FALSE, echo=TRUE}
+flights
+```
+
+## `dplyr` summary
+
+For today:
+
+* `filter()` picks cases based on their values.
+* `arrange()` changes the ordering of the rows.
+* `select()` picks variables based on their names.
+* `mutate()` adds new variables that are functions of existing variables.
+
+In descriptive statistics session:
+
+* `summarise()` reduces multiple values down to a single summary.
+* `group_by()` allows to perform any operation “by group”.
+
+Cheat sheet [pdf](https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf)
+
+## Row filtering (`filter()`)  {.smaller}
+
+* <div class="green2">Selecting all flights on January 1st</div>(`month == 1` and `day == 1`)
+
+```{r}
+filter(flights, month == 1, day == 1)
+```
+
+## Row filtering (`filter()`) {.smaller data-background=#CCE5FF}
+
+* <div class="green2">Selecting all flights on January 1st</div>(`month == 1` and `day == 1`)
+* <div class="green2">Selecting all flights from six first years of the year</div>(`month <= 6`)
+* <div class="green2">Selecting all flights departing with no more that 5 minutes from scheduled departure time</div>(`-5 <= dep_delay` and `dep_delay <= 5` ) or (`abs(dep_delay) <= 5`) or (`between(dep_delay, -5, 5)`)
+
+Exercise.
+
+* <div class="blue2">Select flights flying to "IAH" or "HOU"</div>
+* <div class="blue2">Departed in summer (July, August and September)</div>
+
+## More row-selection functions {.smaller}
+
+* `slice()`. Select rows by position (helpers `slice_head()`, `slice_tail()`, `slice_min()`, `slice_max()`, `slice_sample()`)
+* `distinct()`. Select distinct observations given certain variables
+* `sample_n()`, `sample_frac()`. Random selection of rows
+
+## Ordering observations (`arrange()`) {.smaller}
+
+* Order flights by year, month, day and delay
+
+```{r}
+arrange(flights, year, month, day, dep_delay)
+```
+
+## Ordering observations (`arrange()`) {.smaller}
+
+* Order flights by year, month, day and __decreasing__ delay
+
+```{r}
+arrange(flights, year, month, day, desc(dep_delay))
+```
+
+## Selecting variables (`select()`) {.smaller}
+
+* Select year, month, day and flight number
+
+```{r}
+select(flights, year, month, day, flight)
+```
+
+## `select()` helpers {.smaller}
+
+Special functions can be used to facilitate variable selection.
+
+* Matching names: `starts_with()`, `ends_with()`, `contains()`, `matches()`, `num_range()`. 
+* From vector of names: `all_of()`, `any_of()`. 
+* Using a function: `where()`
+
+```{r}
+select(flights, starts_with('dep_'), contains('arr_'))
+```
+
+## Transform variables (`mutate()`) {.smaller}
+
+* Calculating average flight speed (km/h)
+
+```{r}
+mutate(flights,
+       distance_km = distance * 1.60934,
+       air_time_h = air_time * 60,
+       speed_km_h = distance_km / air_time_h)
+```
+
+# Special atomic vectors
+
+## Dates and time (`lubridate`) (1) {.smaller}
+
+* Parsing dates: `ymd()`, `ydm()`, `myd()`, `mdy()`, `dmy()`, `dym()`
+
+    ```{r, message=FALSE}
+    library(lubridate)
+    x <- c(20090101, "2009-01-02", "2009 01 03", "2009-1-4",
+           "2009-1, 5", "Created on 2009 1 6", "200901 !!! 07")
+    (ddates = ymd(x))
+    ```
+
+* Extracting `year`, `month` or `day`
+
+    ```{r}
+    year(ddates)
+    ```
+
+## Dates and time (`lubridate`) (2) {.smaller}
+
+* Calculating time differences
+
+    ```{r}
+    diff(ymd(20100101) + years(1:5))
+    ```
+
+* How many weeks?
+    
+    ```{r}
+    interval(ymd(20101001), ymd(20101101)) / weeks(1)
+    ```
+
+
+Cheat Sheet [pdf](https://rawgit.com/rstudio/cheatsheets/master/lubridate.pdf)
+
+
+## String (`stringr`)
+
+A cohesive set of functions designed to make working with strings as easy as possible.
+
+* Detect matches: `str_detect()`
+* Subset strings: `str_sub()`
+* Manage lengths: `str_length()`, `str_trim()`
+* Mutate strings: `str_replace()`, `str_to_lower()`, `str_to_title()`
+* Join and split: `str_c()`, `str_split()`
+
+Cheat Sheet [pdf](https://raw.githubusercontent.com/rstudio/cheatsheets/master/strings.pdf)
+
+## Categorical variables (`forcats`)
+
+A suite of tools that solve common problems with factors:
+
+* `fct_reoder()`: reorder the levels of a factor according to some function
+* `fct_infreq()`: reorder the levels of a factor according to category frequencies
+* `fct_relevel()`: reorder the levels of a factor manually
+* `fct_lump_min()`, `fct_lump_n()`, `fct_lump_prop()`: collapse the least frequent values
+
+```{r, include=FALSE}
+x <- factor(rep(LETTERS[1:9], times = c(40, 10, 5, 27, 1, 1, 1, 1, 1)))
+x %>% fct_lump_n(3) %>% table()
+```
+
+Cheat Sheet [pdf](https://raw.githubusercontent.com/rstudio/cheatsheets/master/factors.pdf)

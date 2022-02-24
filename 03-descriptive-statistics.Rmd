@@ -1,0 +1,135 @@
+---
+title: "Descriptive statistics"
+output: 
+  ioslides_presentation: 
+    smaller: yes
+    fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+options(tibble.print_min = 5, tibble.print_max = 5)
+```
+
+## `magrittr`: A Forward-Pipe Operator
+
+```{r, warning=FALSE, echo=TRUE, results='hide', message=FALSE}
+library(nycflights13)
+data(package = 'nycflights13')
+```
+
+* Suppose we are interested in selecting columns: `month`, `day`, `arr_delay`, `dep_delay`; keeping only observations from 02/02/2013.
+
+    * Using `select()`and `filter()` we would proceed as follows:
+    
+    ```{r, results = 'hide'}
+    tab = mutate(flights, month, day, arr_delay, dep_delay)
+    filter(tab, month == 2, day == 13)
+    ```
+
+    * The pipe operator, `%>%`,  simplifies the notation and avoids creating temporal tables.
+    
+    ```{r, results = 'hide'}
+    flights %>%
+      mutate(month, day, arr_delay, dep_delay) %>%
+      filter(month == 2, day == 13)
+    ```
+
+## Summarising a numerical variable {.smaller}
+
+* How is the distribution of `dep_delay`?
+
+```{r, warning=FALSE, echo=TRUE, results='hide', message=FALSE}
+summarise_dep_delay = function(.data) 
+  summarise(.data,
+            mean_ = mean(dep_delay, na.rm = TRUE),
+            median_ = median(dep_delay, na.rm = TRUE),
+            q1_ = quantile(dep_delay, 0.25, na.rm = TRUE),
+            q3_ = quantile(dep_delay, 0.75, na.rm = TRUE),
+            iqr_ = IQR(dep_delay, na.rm = TRUE),
+            min_ = min(dep_delay, na.rm = TRUE),
+            max_ = max(dep_delay, na.rm = TRUE) )
+summarise_dep_delay(flights)
+```
+
+* Highly right-skewed distribution (_mean_ much higher than _median_)
+* Distribution centered around zero (_median_ equal to -2)
+* 50% of central observations between -5 and 11 ($Q_1$ and $Q_3$)
+
+## Summarising a numerical variable with respect to categorical variables {.smaller}
+
+* How is the distribution of `dep_delay` with respect to `origin`?
+
+```{r}
+flights %>%
+  group_by(origin) %>%
+  summarise_dep_delay()
+```
+
+* Distributions of `dep_delay` are similar with respect `origin`.
+* Lower variability of `dep_delay` in `LGA` airport.
+
+## Relation between categorical variables {.smaller}
+
+Let's create an `arrival` variable with two values: "delayed" and "on-time".
+
+```{r}
+flights = flights %>% 
+  mutate(arrival = if_else(arr_delay > 0, 'delayed', 'on-time'))
+```
+
+* How is the distribution of `origin` and `on.time`
+
+```{r}
+tab = flights %>%
+  with(table(arrival, origin))
+```
+
+* Show cross-tabulation with margins:
+
+```{r}
+addmargins(tab)
+```
+
+## Relation between categorical variables.  {.smaller}
+
+__The marginals__
+
+* Row relative frequencies
+
+```{r}
+prop.table(tab, margin = 1)
+```
+
+* Column relative frequencies
+
+```{r}
+prop.table(tab, margin = 2)
+```
+
+## Relation between numerical variables {.smaller}
+
+* How is the distribution of `dep_delay` and `arr_delay`?
+
+```{r}
+flights %>%
+  summarise(
+    m_dep_delay = median(dep_delay, na.rm = TRUE),
+    iqr_dep_delay = IQR(dep_delay, na.rm = TRUE),
+    m_arr_delay = median(arr_delay, na.rm = TRUE),
+    iqr_arr_delay = IQR(arr_delay, na.rm = TRUE),
+    s_dep_arr_delay = cor(dep_delay, arr_delay, use = 'complete.obs')
+  )
+```
+
+* Higher variability in the arrival delay.
+* Strong association between `dep_delay` and `arr_delay`.
+
+## About correlation
+
+* Correlation can be easily misinterpreted.
+  * To measure the effect, we need to be free of confounding. [Causal inference course](https://www.bradyneal.com/causal-inference-course)
+  * Correlation is not valid for relative data.
+      * Variation array for compositional data.
+      * Proportionality: A Valid Alternative to Correlation for Relative Data. [Reference](https://pubmed.ncbi.nlm.nih.gov/25775355/)
