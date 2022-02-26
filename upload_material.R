@@ -9,3 +9,10 @@ fnames = list.files(pattern = "*.html")
 for(fname in fnames){
   file.rename(fname, file.path(.destination_path, fname))
 }
+
+SESSION.1 = "RSTAT-INTRO-SESSION-1"
+SESSION.1.ZIP = paste0(SESSION.1, ".zip")
+if(!exists(SESSION.1.ZIP)){
+  zip(SESSION.1.ZIP, list.files(SESSION.1, full.names = TRUE))
+  file.copy(SESSION.1.ZIP, file.path(.destination_path, SESSION.1.ZIP), overwrite = TRUE)
+}
