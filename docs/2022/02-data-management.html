@@ -168,7 +168,7 @@ slide:not(.current) .plotly.html-widget{
 
 <slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2><code>dplyr</code>: a grammar of data manipulation</h2></hgroup><article  id="dplyr-a-grammar-of-data-manipulation">
 
-</article></slide><slide class=""><hgroup><h2>Datasets</h2></hgroup><article  id="datasets" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Datasets</h2></hgroup><article  class="smaller" id="datasets">
 
 <pre class = 'prettyprint lang-r'>library(nycflights13)
 data(package = &#39;nycflights13&#39;)</pre>
@@ -181,7 +181,7 @@ flights                       Flights data
 planes                        Plane metadata.
 weather                       Hourly weather data</pre>
 
-</article></slide><slide class=""><hgroup><h2>Dataset: <code>flights</code></h2></hgroup><article  id="dataset-flights" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Dataset: <code>flights</code></h2></hgroup><article  class="smaller" id="dataset-flights">
 
 <pre class = 'prettyprint lang-r'>flights</pre>
 
@@ -217,7 +217,7 @@ weather                       Hourly weather data</pre>
 
 <p>Cheat sheet <a href='https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf' title=''>pdf</a></p>
 
-</article></slide><slide class=""><hgroup><h2>Row filtering (<code>filter()</code>)</h2></hgroup><article  id="row-filtering-filter" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Row filtering (<code>filter()</code>)</h2></hgroup><article  class="smaller" id="row-filtering-filter">
 
 <ul>
 <li><div class="green2">
@@ -240,7 +240,7 @@ Selecting all flights on January 1st</div>
 ## #   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,
 ## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</pre>
 
-</article></slide><slide class="fill nobackground" style="background: #CCE5FF;"><hgroup><h2>Row filtering (<code>filter()</code>)</h2></hgroup><article  id="row-filtering-filter-1" class="smaller">
+</article></slide><slide class="fill nobackground" style="background: #CCE5FF;"><hgroup><h2>Row filtering (<code>filter()</code>)</h2></hgroup><article  class="smaller" id="row-filtering-filter-1">
 
 <ul>
 <li><div class="green2">
@@ -266,7 +266,7 @@ Select flights flying to &ldquo;IAH&rdquo; or &ldquo;HOU&rdquo;</div></li>
 Departed in summer (July, August and September)</div></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>More row-selection functions</h2></hgroup><article  id="more-row-selection-functions" class="smaller">
+</article></slide><slide class=""><hgroup><h2>More row-selection functions</h2></hgroup><article  class="smaller" id="more-row-selection-functions">
 
 <ul>
 <li><code>slice()</code>. Select rows by position (helpers <code>slice_head()</code>, <code>slice_tail()</code>, <code>slice_min()</code>, <code>slice_max()</code>, <code>slice_sample()</code>)</li>
@@ -274,7 +274,7 @@ Departed in summer (July, August and September)</div></li>
 <li><code>sample_n()</code>, <code>sample_frac()</code>. Random selection of rows</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Ordering observations (<code>arrange()</code>)</h2></hgroup><article  id="ordering-observations-arrange" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Ordering observations (<code>arrange()</code>)</h2></hgroup><article  class="smaller" id="ordering-observations-arrange">
 
 <ul>
 <li>Order flights by year, month, day and delay</li>
@@ -294,7 +294,7 @@ Departed in summer (July, August and September)</div></li>
 ## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
 ## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Ordering observations (<code>arrange()</code>)</h2></hgroup><article  id="ordering-observations-arrange-1" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Ordering observations (<code>arrange()</code>)</h2></hgroup><article  class="smaller" id="ordering-observations-arrange-1">
 
 <ul>
 <li>Order flights by year, month, day and <strong>decreasing</strong> delay</li>
@@ -314,7 +314,7 @@ Departed in summer (July, August and September)</div></li>
 ## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
 ## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Selecting variables (<code>select()</code>)</h2></hgroup><article  id="selecting-variables-select" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Selecting variables (<code>select()</code>)</h2></hgroup><article  class="smaller" id="selecting-variables-select">
 
 <ul>
 <li>Select year, month, day and flight number</li>
@@ -332,7 +332,7 @@ Departed in summer (July, August and September)</div></li>
 ## 5  2013     1     1    461
 ## # … with 336,771 more rows</pre>
 
-</article></slide><slide class=""><hgroup><h2><code>select()</code> helpers</h2></hgroup><article  id="select-helpers" class="smaller">
+</article></slide><slide class=""><hgroup><h2><code>select()</code> helpers</h2></hgroup><article  class="smaller" id="select-helpers">
 
 <p>Special functions can be used to facilitate variable selection.</p>
 
@@ -354,7 +354,7 @@ Departed in summer (July, August and September)</div></li>
 ## 5      554        -6      812            837       -25
 ## # … with 336,771 more rows</pre>
 
-</article></slide><slide class=""><hgroup><h2>Transform variables (<code>mutate()</code>)</h2></hgroup><article  id="transform-variables-mutate" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Transform variables (<code>mutate()</code>)</h2></hgroup><article  class="smaller" id="transform-variables-mutate">
 
 <ul>
 <li>Calculating average flight speed (km/h)</li>
@@ -380,7 +380,7 @@ Departed in summer (July, August and September)</div></li>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Special atomic vectors</h2></hgroup><article  id="special-atomic-vectors">
 
-</article></slide><slide class=""><hgroup><h2>Dates and time (<code>lubridate</code>) (1)</h2></hgroup><article  id="dates-and-time-lubridate-1" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Dates and time (<code>lubridate</code>) (1)</h2></hgroup><article  class="smaller" id="dates-and-time-lubridate-1">
 
 <ul>
 <li><p>Parsing dates: <code>ymd()</code>, <code>ydm()</code>, <code>myd()</code>, <code>mdy()</code>, <code>dmy()</code>, <code>dym()</code></p>
@@ -399,7 +399,7 @@ x &lt;- c(20090101, &quot;2009-01-02&quot;, &quot;2009 01 03&quot;, &quot;2009-1
 <pre >## [1] 2009 2009 2009 2009 2009 2009 2009</pre></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Dates and time (<code>lubridate</code>) (2)</h2></hgroup><article  id="dates-and-time-lubridate-2" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Dates and time (<code>lubridate</code>) (2)</h2></hgroup><article  class="smaller" id="dates-and-time-lubridate-2">
 
 <ul>
 <li><p>Calculating time differences</p>

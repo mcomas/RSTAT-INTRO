@@ -36,6 +36,8 @@ data(package = 'nycflights13')
       filter(month == 2, day == 13)
     ```
 
+# Summarising variables
+
 ## Summarising a numerical variable {.smaller}
 
 * How is the distribution of `dep_delay`?
@@ -126,10 +128,58 @@ flights %>%
 * Higher variability in the arrival delay.
 * Strong association between `dep_delay` and `arr_delay`.
 
-## About correlation
+# Wrangling
+
+## Tidy Data
+
+Tidy data is a standard way of mapping the meaning of a dataset to its structure.
+
+1. Each variable forms a column
+2. Each observation forms a row
+3. Each type of observational unit forms a table
+
+## `tidyr`: helpers to create tidy data
+
+* "Pivotting". `pivot_longer()` and `pivot_wider()`
+* "Rectangling".
+* "Nesting".
+* Splitting and combining: `separate()` and `unite()`.
+
+<br><br><br><br>
+
+Cheat Sheet [pdf](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)
+
+## Messy datasets (1) {.smaller} 
+
+__Column headers are values, no variable names__
+
+```{r}
+tidyr::relig_income
+```
+
+## Messy datasets (2) {.smaller}   
+
+__Multiple variables stored in a column__
+
+```{r}
+tidyr::who
+```
+
+## Messy datasets (3) {.smaller} 
+
+__Variables are stored in both rows and columns__
+
+```{r, message=FALSE, eval=FALSE}
+library(readr)
+read_csv("session-02-presentation/weather.csv")
+```
+
+<!-- ## About correlation
 
 * Correlation can be easily misinterpreted.
   * To measure the effect, we need to be free of confounding. [Causal inference course](https://www.bradyneal.com/causal-inference-course)
   * Correlation is not valid for relative data.
       * Variation array for compositional data.
       * Proportionality: A Valid Alternative to Correlation for Relative Data. [Reference](https://pubmed.ncbi.nlm.nih.gov/25775355/)
+
+-->

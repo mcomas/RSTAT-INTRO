@@ -190,6 +190,8 @@ filter(tab, month == 2, day == 13)</pre>
   filter(month == 2, day == 13)</pre></li>
 </ul>
 
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Summarising variables</h2></hgroup><article  id="summarising-variables" class="smaller ">
+
 </article></slide><slide class=""><hgroup><h2>Summarising a numerical variable</h2></hgroup><article  id="summarising-a-numerical-variable" class="smaller smaller">
 
 <ul>
@@ -312,21 +314,86 @@ summarise_dep_delay(flights)</pre>
 <li>Strong association between <code>dep_delay</code> and <code>arr_delay</code>.</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>About correlation</h2></hgroup><article  id="about-correlation" class="smaller ">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Wrangling</h2></hgroup><article  id="wrangling" class="smaller ">
+
+</article></slide><slide class=""><hgroup><h2>Tidy Data</h2></hgroup><article  id="tidy-data" class="smaller ">
+
+<p>Tidy data is a standard way of mapping the meaning of a dataset to its structure.</p>
+
+<ol>
+<li>Each variable forms a column</li>
+<li>Each observation forms a row</li>
+<li>Each type of observational unit forms a table</li>
+</ol>
+
+</article></slide><slide class=""><hgroup><h2><code>tidyr</code>: helpers to create tidy data</h2></hgroup><article  id="tidyr-helpers-to-create-tidy-data" class="smaller ">
 
 <ul>
-<li>Correlation can be easily misinterpreted.
+<li>&ldquo;Pivotting&rdquo;. <code>pivot_longer()</code> and <code>pivot_wider()</code></li>
+<li>&ldquo;Rectangling&rdquo;.</li>
+<li>&ldquo;Nesting&rdquo;.</li>
+<li>Splitting and combining: <code>separate()</code> and <code>unite()</code>.</li>
+</ul>
 
-<ul>
-<li>To measure the effect, we need to be free of confounding. <a href='https://www.bradyneal.com/causal-inference-course' title=''>Causal inference course</a></li>
-<li>Correlation is not valid for relative data.
+<p><br><br><br><br></p>
 
-<ul>
-<li>Variation array for compositional data.</li>
-<li>Proportionality: A Valid Alternative to Correlation for Relative Data. <a href='https://pubmed.ncbi.nlm.nih.gov/25775355/' title=''>Reference</a></li>
-</ul></li>
-</ul></li>
-</ul></article></slide>
+<p>Cheat Sheet <a href='https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf' title=''>pdf</a></p>
+
+</article></slide><slide class=""><hgroup><h2>Messy datasets (1)</h2></hgroup><article  id="messy-datasets-1" class="smaller smaller">
+
+<p><strong>Column headers are values, no variable names</strong></p>
+
+<pre class = 'prettyprint lang-r'>tidyr::relig_income</pre>
+
+<pre >## # A tibble: 18 × 11
+##   religion  `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
+##   &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1 Agnostic       27        34        60        81        76       137        122
+## 2 Atheist        12        27        37        52        35        70         73
+## 3 Buddhist       27        21        30        34        33        58         62
+## 4 Catholic      418       617       732       670       638      1116        949
+## 5 Don’t kn…      15        14        15        11        10        35         21
+## # … with 13 more rows, and 3 more variables: `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;,
+## #   `Don&#39;t know/refused` &lt;dbl&gt;</pre>
+
+</article></slide><slide class=""><hgroup><h2>Messy datasets (2)</h2></hgroup><article  id="messy-datasets-2" class="smaller smaller">
+
+<p><strong>Multiple variables stored in a column</strong></p>
+
+<pre class = 'prettyprint lang-r'>tidyr::who</pre>
+
+<pre >## # A tibble: 7,240 × 60
+##   country   iso2  iso3   year new_sp_m014 new_sp_m1524 new_sp_m2534 new_sp_m3544
+##   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;int&gt;       &lt;int&gt;        &lt;int&gt;        &lt;int&gt;        &lt;int&gt;
+## 1 Afghanis… AF    AFG    1980          NA           NA           NA           NA
+## 2 Afghanis… AF    AFG    1981          NA           NA           NA           NA
+## 3 Afghanis… AF    AFG    1982          NA           NA           NA           NA
+## 4 Afghanis… AF    AFG    1983          NA           NA           NA           NA
+## 5 Afghanis… AF    AFG    1984          NA           NA           NA           NA
+## # … with 7,235 more rows, and 52 more variables: new_sp_m4554 &lt;int&gt;,
+## #   new_sp_m5564 &lt;int&gt;, new_sp_m65 &lt;int&gt;, new_sp_f014 &lt;int&gt;,
+## #   new_sp_f1524 &lt;int&gt;, new_sp_f2534 &lt;int&gt;, new_sp_f3544 &lt;int&gt;,
+## #   new_sp_f4554 &lt;int&gt;, new_sp_f5564 &lt;int&gt;, new_sp_f65 &lt;int&gt;,
+## #   new_sn_m014 &lt;int&gt;, new_sn_m1524 &lt;int&gt;, new_sn_m2534 &lt;int&gt;,
+## #   new_sn_m3544 &lt;int&gt;, new_sn_m4554 &lt;int&gt;, new_sn_m5564 &lt;int&gt;,
+## #   new_sn_m65 &lt;int&gt;, new_sn_f014 &lt;int&gt;, new_sn_f1524 &lt;int&gt;, …</pre>
+
+</article></slide><slide class=""><hgroup><h2>Messy datasets (3)</h2></hgroup><article  id="messy-datasets-3" class="smaller smaller">
+
+<p><strong>Variables are stored in both rows and columns</strong></p>
+
+<pre class = 'prettyprint lang-r'>library(readr)
+read_csv(&quot;session-02-presentation/weather.csv&quot;)</pre>
+
+<!-- ## About correlation
+
+* Correlation can be easily misinterpreted.
+  * To measure the effect, we need to be free of confounding. [Causal inference course](https://www.bradyneal.com/causal-inference-course)
+  * Correlation is not valid for relative data.
+      * Variation array for compositional data.
+      * Proportionality: A Valid Alternative to Correlation for Relative Data. [Reference](https://pubmed.ncbi.nlm.nih.gov/25775355/)
+
+--></article></slide>
 
 
   <slide class="backdrop"></slide>
