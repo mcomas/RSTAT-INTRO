@@ -1,0 +1,85 @@
+---
+title: "Introduction to R"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#  {.tabset}
+
+## Program
+
+#### Session 1. Introduction to R
+
+-   R structures.
+-   Repositories and packages.
+-   Importing and exporting data.
+
+#### Session 2. Data management
+
+-   Data cleaning.
+-   Dealing with dates.
+-   Characters and strings.
+-   Factors.
+
+#### Session 3. Descriptive statistics
+
+-   Summarizing data with R.
+-   Specific packages.
+-   Basic statistics.
+-   Describing variables graphically.
+
+#### Session 4. Inferential statistics
+
+-   Statistical hypothesis testing
+-   Student's t-test and non-parametric tests for numerical data.
+-   Pearson's Chi-squared and Fisher's Exact Test for count data.
+-   Tests for association between paired samples.
+
+#### Session 5. Linear models
+
+-   Linear regression.
+-   Logistic regression.
+
+#### Session 6. Data visualization and reporting results
+
+-   Creating graphics with R.
+-   Reporting results with R.
+
+## Material
+
+__Session 1. Introduction to R__
+
+-   Presentation [01-rstat-intro.html](01-rstat-intro.html)
+-   Project: [RSTAT-INTRO-SESSION-1.zip](RSTAT-INTRO-SESSION-1.zip)
+
+External material:
+
+* An introduction to R: <https://cran.r-project.org/doc/manuals/r-patched/R-intro.html>
+
+
+__Session 2. Data management__
+
+-   Presentation [02-data-management.html](02-data-management.html)
+
+External material:
+
+* RStudio cheatsheets: <https://www.rstudio.com/resources/cheatsheets/>
+* R for Data Science: <https://r4ds.had.co.nz/>
+
+__Session 3. Descriptive statistics__
+
+-   Presentation [03-descriptive-statistics-dplyr.html](03-descriptive-statistics-dplyr.html)
+-   Project: [RSTAT-INTRO-SESSION-3.zip](RSTAT-INTRO-SESSION-3.zip)
+
+__Session 4. Inferential statistics__
+
+__Session 5. Linear models__
+
+__Session 6. Data visualization and reporting results__
+
+## Contact
+
+Marc Comas-Cufí ([marc.comas\@udg.edu](mailto:marc.comas@udg.edu){.email})

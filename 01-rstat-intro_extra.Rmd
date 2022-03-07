@@ -1,0 +1,105 @@
+
+# Activities
+
+## Familiarising with RStudio {data-background=#CCE5FF}
+
+1. Open RStudio IDE.
+1. Locate the `Console` and the `Environment` panes.
+1. One by one, write the following command in the `Console` and press return:
+
+    ```{r, eval=FALSE}
+    a <- "banana"
+    b <- list(banana_el = "banana", logic_el = TRUE, numeric_el = pi)
+    c <- data.frame(fr = c("pear", "apple"), vo = c('A', 'E'), lo = c(T, F))
+    d <- function(x) x * sin(x)
+    ```
+
+1. Accessing the help from the command line:
+
+    ```{r}
+    ?t.test
+    ```
+    
+    In the `Help` pane, click <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAkCAYAAAD7PHgWAAABZklEQVR42u3Uv0rDUBTH8bxCFydfwKewIILgIAiCryCC4OBQxMHBwdFBBMEuRXDQwaWLuHZQQZ9AbZs2aWKSJrrH3sgdLD2/29z8uXfIge+Wk3zgJjGMajSaZs2IWdrivKVaknZIjntaMJK0Qk7jtEJO4xqLf2mBnIXrPL/GnZc39UgKF0U/SdbIU4ekcGH4/S8lSAoXjKOZlYqkcH4QwkpBUjjPH89VoUgK53pBqgpBUjjHDaQyh05+SApnO36mBpabHUnh2DHl0dD+kkdSOHbTvEuNpHDm5FioHk63YWjXlDludgHHnV1dx/3Ji41qn2zBRPvsGRx5WJ/zmDnurv0Y9wYO7P54EybaZ8/hyFQfCsOxuuYIdnu0ARPtc2Dq3wwHfvZt2E1jHSbazwz86Nmw1sEaTLSfGfjetWDN/VWYaL9w4OXeCkw58GK3DlMOPN9ZhlVA7YH8BkUnBSwLJwWsppqS5he4PcqnV4j1EQAAAABJRU5ErkJggg==" width="20" height="18"> icon to obtain general information.
+
+## Creating and opening a project {data-background=#CCE5FF}
+
+1. Detect were you are working:
+
+    ```{r, eval=FALSE}
+    getwd()      # GET Working Directory
+    list.files() # List files in your current directory
+    ```
+
+1. By default, `Files` pane should show the current directory.
+1. Press <img src="data:image/png;base64,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" width="16" height="16"> icon at the top-right corner and select `New Project...`
+    * Create a project in a new Directory of your computer.
+    * Name your project `temporal`.
+
+1. Download the file <https://github.com/mcomas/RINTRO-01/archive/master.zip>.
+1. Unzip the file in a new Directory.
+1. Open the file `RINTRO-01.Rproj`.
+
+
+## Executing R scripts {data-background=#CCE5FF}
+
+1. In project `RINTRO-01-master`, open the file `01-script.R`
+
+
+
+
+
+
+## Basic data structures
+
+# Repositories and packages.
+
+# Importing and exporting data.
+
+
+
+
+
+
+
+
+# Simple manipulations
+
+## Vectors and assignment
+
+## Vector arithmetic
+
+## Generating sequences
+
+## Logical vectors
+
+## Missing values
+
+## Character vectors
+
+## Vector selection
+
+## Other type of objects
+
+-   Functions
+-   Matrices
+-   Lists
+-   Data.frames
+
+# Repositories and packages
+
+
+
+# Importing and exporting data
+
+## RData files
+
+## Text files
+
+## Excel files
+
+## Other statistical softwares
+
+* SPSS
+
+* Stata

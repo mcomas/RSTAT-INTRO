@@ -12,33 +12,15 @@ library(tidyverse)
 options(tibble.print_min = 5, tibble.print_max = 5)
 ```
 
-## `magrittr`: A Forward-Pipe Operator
+
+# Summarising variables
+
+## Summarising a numerical variable {.smaller}
 
 ```{r, warning=FALSE, echo=TRUE, results='hide', message=FALSE}
 library(nycflights13)
 data(package = 'nycflights13')
 ```
-
-* Suppose we are interested in selecting columns: `month`, `day`, `arr_delay`, `dep_delay`; keeping only observations from 02/02/2013.
-
-    * Using `select()`and `filter()` we would proceed as follows:
-    
-    ```{r, results = 'hide'}
-    tab = mutate(flights, month, day, arr_delay, dep_delay)
-    filter(tab, month == 2, day == 13)
-    ```
-
-    * The pipe operator, `%>%`,  simplifies the notation and avoids creating temporal tables.
-    
-    ```{r, results = 'hide'}
-    flights %>%
-      mutate(month, day, arr_delay, dep_delay) %>%
-      filter(month == 2, day == 13)
-    ```
-
-# Summarising variables
-
-## Summarising a numerical variable {.smaller}
 
 * How is the distribution of `dep_delay`?
 
@@ -59,14 +41,13 @@ summarise_dep_delay(flights)
 * Distribution centered around zero (_median_ equal to -2)
 * 50% of central observations between -5 and 11 ($Q_1$ and $Q_3$)
 
-## Summarising a numerical variable with respect to categorical variables {.smaller}
+## Summarising by groups {.smaller}
 
 * How is the distribution of `dep_delay` with respect to `origin`?
 
 ```{r}
-flights %>%
-  group_by(origin) %>%
-  summarise_dep_delay()
+flights_grouped = group_by(flights, origin)
+summarise_dep_delay(flights_grouped)
 ```
 
 * Distributions of `dep_delay` are similar with respect `origin`.
@@ -77,15 +58,15 @@ flights %>%
 Let's create an `arrival` variable with two values: "delayed" and "on-time".
 
 ```{r}
-flights = flights %>% 
-  mutate(arrival = if_else(arr_delay > 0, 'delayed', 'on-time'))
+flights = mutate(flights, arrival = if_else(arr_delay > 0, 'delayed', 'on-time'))
 ```
 
 * How is the distribution of `origin` and `on.time`
 
 ```{r}
-tab = flights %>%
-  with(table(arrival, origin))
+tab = with(flights, table(arrival, origin))
+# tab = table(flights[["arrival"]], flights[["origin"]])
+# tab = table(flights$arrival, flights$origin)
 ```
 
 * Show cross-tabulation with margins:
@@ -115,20 +96,63 @@ prop.table(tab, margin = 2)
 * How is the distribution of `dep_delay` and `arr_delay`?
 
 ```{r}
-flights %>%
-  summarise(
-    m_dep_delay = median(dep_delay, na.rm = TRUE),
-    iqr_dep_delay = IQR(dep_delay, na.rm = TRUE),
-    m_arr_delay = median(arr_delay, na.rm = TRUE),
-    iqr_arr_delay = IQR(arr_delay, na.rm = TRUE),
-    s_dep_arr_delay = cor(dep_delay, arr_delay, use = 'complete.obs')
-  )
+summarise(flights,
+          m_dep_delay = median(dep_delay, na.rm = TRUE),
+          iqr_dep_delay = IQR(dep_delay, na.rm = TRUE),
+          m_arr_delay = median(arr_delay, na.rm = TRUE),
+          iqr_arr_delay = IQR(arr_delay, na.rm = TRUE),
+          s_dep_arr_delay = cor(dep_delay, arr_delay, use = 'complete.obs')
+)
 ```
 
 * Higher variability in the arrival delay.
 * Strong association between `dep_delay` and `arr_delay`.
 
-# Wrangling
+## `magrittr`: A Forward-Pipe Operator
+
+* Suppose we are interested in selecting columns: `month`, `day`, `arr_delay`, `dep_delay`; keeping only observations from 02/02/2013.
+
+    * Using `select()`and `filter()` we would proceed as follows:
+    
+    ```{r, results = 'hide'}
+    tab = mutate(flights, month, day, arr_delay, dep_delay)
+    filter(tab, month == 2, day == 13)
+    ```
+
+    * The pipe operator, `%>%`,  simplifies the notation and avoids creating temporal tables.
+    
+    ```{r, results = 'hide'}
+    flights %>%
+      mutate(month, day, arr_delay, dep_delay) %>%
+      filter(month == 2, day == 13)
+    ```
+
+## Dataset importation {.smaller data-background=#CCE5FF}
+
+* Import the dataset `birthwt: Risk Factors Associated with Low Infant Birth Weight` available at `birthwt.xlsx` in `RSTAT-INTRO-SESSION-3` project. 
+
+  This dataset contains the following columns:
+  
+    * `low` indicator of birth weight less than 2.5 kg.
+    * `age` mother's age in years.
+    * `lwt` mother's weight in pounds at last menstrual period.
+    * `race` mother's race (1 = white, 2 = black, 3 = other).
+    * `smoke` smoking status during pregnancy.
+    * `ptl` number of previous premature labours.
+    * `ht` history of hypertension.
+    * `ui` presence of uterine irritability.
+    * `ftv` number of physician visits during the first trimester.
+    * `bwt` birth weight in grams.
+
+## Summarising variables {.smaller data-background=#CCE5FF}
+
+* Express mother's weight in Kg.
+* Summarise infant and mother's weight.
+* Get the frequencies between smoke and low indicator variables. Draw some conclusion from obtained frequencies.
+* Calculate the average of infant's weight by smoking, race and hypertension mother's conditions.
+
+
+<!-- # Wrangling
 
 ## Tidy Data
 
