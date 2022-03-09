@@ -76,6 +76,8 @@ __Session 3. Descriptive statistics__
 
 __Session 4. Inferential statistics__
 
+-   Presentation [04-inferential-statistics.html](04-inferential-statistics.html)
+
 __Session 5. Linear models__
 
 __Session 6. Data visualization and reporting results__
