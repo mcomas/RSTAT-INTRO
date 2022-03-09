@@ -28,26 +28,30 @@ theme_set(theme_minimal())
 ```
 
 
-# Statistical inference
 
-## Objective
+
+<!--
+
+ # Statistical inference
+
+ ## Objective
 
 Given a sample $X = \{x_1, \dots, x_N\}$, we are interested in analysing a model $\text{Model}(\theta)$, $\theta \in \Theta$, under the assumption that $x_i$'s are independent and identically distributed, i.e. $x_i \sim \text{Model}(\theta)$.
 
-### Examples
+ ### Examples
 
 * Given $X = \{x_1, \dots, x_N\}$ numeric, ... _study $E[x_i]$, assuming $x_i$'s follow the same numerical distribution $f(\theta)$_.
 * Given $X = \{x_1, \dots, x_N\}$ binary 0/1, ... _study $E[x_i]$, assuming $x_i$'s follow a $Bin(n=1,\pi)$_.
 
-### Types of inference
+ ### Types of inference
 
 * __Confidence intervals__. Find $\theta_{-}$ and $\theta_{+}$ such that certain $\text{P}(\theta_{-} \leq \theta \leq \theta_{+})$ holds.
 * __Hypothesis testing__. Is a certain hypothesis, $H_0$, about $\text{Model}(\theta)$ plausible?
 
 
-# Confidence intervals
+ # Confidence intervals
 
-## About confidence intervals
+ ## About confidence intervals
 
 * Confidence interval are regions where we think certain parameters $\theta$ is. 
 * For a level of confidence $1-\alpha$ (we should think $\alpha$ small), we talk about $(1-\alpha)100\%$ confidence interval (CI) for parameter $\theta$.
@@ -59,7 +63,7 @@ Given a sample $X = \{x_1, \dots, x_N\}$, we are interested in analysing a model
     * For the expected value of a random variable: __mean__, $\mu$, if continuous or __proportion__, $\pi$, if dichotomous (binomial with $n=1$).
     * For coefficients/parameters of a model.
 
-## Confidence intervals for proportions
+ ## Confidence intervals for proportions
 
 Let's assume $X \sim Bin(n=1, \pi)$, for example:
 
@@ -82,7 +86,7 @@ X2 = c(0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 
 * If we decide to use this new sample, how it will affect to our uncertainty of $\pi$?
 
-## Bootstrap
+ ## Bootstrap
 
 * Bootstrap is a simple and powerful tool that, among others, is useful to build confidence intervals for any type of parameter.
 * The method consists in sampling from the original sample multiple times __using replacement__.
@@ -102,7 +106,7 @@ quantile(v_proportions, c(alpha/2, 1-alpha/2))
 ```
 
 
-## Asymptotic results
+ ## Asymptotic results
 
 If $X \sim Bin(n=1, \pi)$ and $N$ is high enough,
 \[
@@ -126,7 +130,7 @@ qnorm(c(alpha/2, 1-alpha/2), p, sqrt(p*(1-p)/N))
 # p + c(1,-1) * qnorm(alpha/2) * sqrt(p*(1-p)/N)
 ```
 
-## Sample size and uncertainty
+ ## Sample size and uncertainty
 
 * The higher the sample the lower the uncertainty. $N_1 = 20$, $N_2=100$.
 
@@ -148,7 +152,7 @@ qnorm(c(alpha/2, 1-alpha/2), p1, sqrt(p1*(1-p1)/N1))
 qnorm(c(alpha/2, 1-alpha/2), p2, sqrt(p2*(1-p2)/N2))
 ```
 
-## Activity: Visualizing uncertainty
+ ## Activity: Visualizing uncertainty
 
 * Taking into an account the generating process, what visualization do you prefer?
 
@@ -178,7 +182,7 @@ p4 = ggplot(data=df) +
 ggarrange(p1, p2, p3, p4, nrow = 2)
 ```
 
-## Confidence interval for means
+ ## Confidence interval for means
 
 ```{r, echo=TRUE}
 X = c(11.2, 10.28, 10.24, 10.69, 8.34, 11.06, 9.53, 10.6, 8.78, 9.16,
@@ -202,6 +206,8 @@ N = length(X)
 ```{r, echo=TRUE}
 mean(X) + qt(c(alpha/2, 1-alpha/2), 49) * sqrt(var(X)/N)
 ```
+
+-->
 
 # Hypothesis testing
 
@@ -399,10 +405,10 @@ t.test(X~G, data = data)
 
 Depending on the nature of the two variables, other tests exist to contrast their independence.
 
-* Between categorical variables: chi-squared contingency table test.
+* Between categorical variables: Fisher exact test, or chi-squared contingency table test if Fisher does not work.
   
 ```{r, eval=FALSE, echo=TRUE}
-chisq.test(table(X,Y))
+fisher.test(table(X,Y)) # chisq.test(table(X,Y))
 ```
 
 * Between numerical variable: test for Association/Correlation Between Paired Samples.
@@ -418,9 +424,9 @@ cor.test(X,Y)
 summary(aov(Y~X))
 ```
     
-## Activity: Comparing group means (1)
+<!-- ## Activity: Comparing group means (1)
 
-* After downloading data from [https://covid.ourworldindata.org/data/](https://covid.ourworldindata.org/data/).
+* After downloading data from [https://covid.ourworldindata.org/data/owid-covid-data.csv](https://covid.ourworldindata.org/data/owid-covid-data.csv).
 
 ```{r}
 if(!file.exists("owid-covid-data.csv")){
@@ -456,7 +462,9 @@ data = data %>%
 
 * `rate` measures how many new cases do we have in comparison to the number of new cases detected the last two weeks.
 
-## Activity: Comparing group means (2)
+-->
+
+<!-- ## Activity: Comparing group means (2)
 
 * We only keep observations from Germany and France, and from April to October:
 
@@ -479,7 +487,9 @@ dttest = data %>%
     map_df(t_test, broom::tidy))
 ```
 
-## Activity: Comparing group means (3)
+-->
+
+<!-- ## Activity: Comparing group means (3)
 
 * To visualize the comparison between countries, we try three different approaches.
 
@@ -512,14 +522,16 @@ p3 = ggplot() +
 ggarrange(p1, p2, p3, ncol = 1)
 ```
 
-## Activity: Comparing group means (4)
+-->
+
+<!-- ## Activity: Comparing group means (4)
 
 * Comment about the pros and cons of this three visualizations.
 * Which one do you prefer?
 * Think about another visualization?
 * Draw some conclusions from this comparison.
 
-# Other tests
+ # Other tests -->
 
 ## Categorical distribution
 
@@ -552,6 +564,7 @@ ggplot() +
   labs(x=TeX("$\\chi^2$"), title = TeX("Distribution of $\\chi^2$ statistics simulated from Cat($\\pi = (.2,0.2,0.2,0.2,0.2)$)"))
 ```
 
+
 ## Gaussian distribution
 
 **Shapiro-Wilk test**
@@ -579,9 +592,22 @@ For $X$ categorical and $Y$ numerical.
 bartlett.test(Y~X)
 ```
 
-* Bartlett's test assumes normality. For non-normal variables better to use the Levene test
+* Bartlett's test assumes normality. For non-normal variables better to use the Levene test (available in package `car`)
 
 ```{r, eval=FALSE, echo=TRUE}
 car::leveneTest(Y~X)
+```
+
+## `broom` Statistical Objects into Tibbles
+
+```{r, echo=TRUE}
+binom.test(c(682, 243), p = 3/4)
+```
+
+With `broom`:
+
+```{r, echo=TRUE}
+library(broom)
+tidy(binom.test(c(682, 243), p = 3/4))
 ```
 
