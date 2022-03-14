@@ -424,5 +424,6 @@ BUT REMEMBER:
 * `ggmap` for maps <https://github.com/dkahle/ggmap>
 * `ggtern`for ternary diagrams <http://www.ggtern.com/>
 * `ggdendro` for dendrograms <https://github.com/andrie/ggdendro>
-
-
+* `ggraph` for graphs/networks <https://ggraph.data-imaginist.com/>
+* `ggnetwork` for graphs/networks <https://briatte.github.io/ggnetwork/>
+* `survminer` for survival curves <https://rpkgs.datanovia.com/survminer/index.html> (one year since last update)

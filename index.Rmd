@@ -80,8 +80,19 @@ __Session 4. Inferential statistics__
 
 __Session 5. Linear models__
 
+Easy-plotting packages:
+
+- [`ggstatplot`](https://indrajeetpatil.github.io/ggstatsplot/index.html): `ggplot2` Based Plots with Statistical Details.
+- [`GGally`](https://ggobi.github.io/ggally/index.html): Extension to ggplot2
+- [`survminer`](https://rpkgs.datanovia.com/survminer/): Survival Analysis and Visualization
+
 __Session 6. Data visualization and reporting results__
 
+- Presentation [06-descriptive-statistics-ggplot2.html](06-descriptive-statistics-ggplot2.html)
+
+<!-- ggstatsplot -->
+<!-- https://www.datanovia.com/en/lessons/heatmap-in-r-static-and-interactive-visualization/ -->
+<!-- Interaction networks -->
 ## Contact
 
 Marc Comas-Cufí ([marc.comas\@udg.edu](mailto:marc.comas@udg.edu){.email})
