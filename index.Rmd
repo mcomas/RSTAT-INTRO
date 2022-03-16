@@ -89,6 +89,7 @@ Easy-plotting packages:
 __Session 6. Data visualization and reporting results__
 
 - Presentation [06-descriptive-statistics-ggplot2.html](06-descriptive-statistics-ggplot2.html)
+- Project: [RSTAT-INTRO-SESSION-6.zip](RSTAT-INTRO-SESSION-6.zip)
 
 <!-- ggstatsplot -->
 <!-- https://www.datanovia.com/en/lessons/heatmap-in-r-static-and-interactive-visualization/ -->

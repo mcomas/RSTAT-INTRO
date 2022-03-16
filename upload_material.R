@@ -23,3 +23,10 @@ if(!exists(SESSION.3.ZIP)){
   zip(SESSION.3.ZIP, list.files(SESSION.3, full.names = TRUE))
   file.copy(SESSION.3.ZIP, file.path(.destination_path, SESSION.3.ZIP), overwrite = TRUE)
 }
+
+SESSION.6 = "RSTAT-INTRO-SESSION-6"
+SESSION.6.ZIP = paste0(SESSION.6, ".zip")
+if(!exists(SESSION.6.ZIP)){
+  zip(SESSION.6.ZIP, list.files(SESSION.6, full.names = TRUE))
+  file.copy(SESSION.6.ZIP, file.path(.destination_path, SESSION.6.ZIP), overwrite = TRUE)
+}
