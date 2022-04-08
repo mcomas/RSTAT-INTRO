@@ -91,9 +91,13 @@ __Session 6. Data visualization and reporting results__
 - Presentation [06-descriptive-statistics-ggplot2.html](06-descriptive-statistics-ggplot2.html)
 - Project: [RSTAT-INTRO-SESSION-6.zip](RSTAT-INTRO-SESSION-6.zip)
 
+*Scripts de les session* [RSTAT-INTRO-SESSIONS.zip](RSTAT-INTRO-SESSIONS.zip)
+
 <!-- ggstatsplot -->
 <!-- https://www.datanovia.com/en/lessons/heatmap-in-r-static-and-interactive-visualization/ -->
 <!-- Interaction networks -->
+
+
 ## Contact
 
 Marc Comas-Cufí ([marc.comas\@udg.edu](mailto:marc.comas@udg.edu){.email})
